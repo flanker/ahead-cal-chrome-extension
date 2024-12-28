@@ -1,100 +1,184 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AheadCal - Forward Planning</title>
     <style>
-        body {
-            margin: 0;
-            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-            background: #f5f5f7;
-        }
+      body {
+        margin: 0;
+        font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+        background: #f5f5f7;
+      }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 40px 20px;
-            text-align: center;
-        }
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 40px 20px;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        gap: 32px;
+      }
 
-        .hero {
-            background: #e31b5d;
-            padding: 80px 20px;
-            border-radius: 24px;
-            margin-bottom: 40px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-        }
+      .hero {
+        background: #e31b5d;
+        padding: 80px 20px;
+        border-radius: 24px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+      }
 
-        .logo {
-            font-size: 64px;
-            font-weight: bold;
-            color: #ffd700;
-            text-shadow: 4px 4px 0 rgba(0,0,0,0.2);
-            margin-bottom: 16px;
-        }
+      .logo {
+        font-size: 64px;
+        font-weight: bold;
+        color: #ffd700;
+        text-shadow: 4px 4px 0 rgba(0, 0, 0, 0.2);
+        margin-bottom: 16px;
+      }
 
-        .tagline {
-            font-size: 24px;
-            color: white;
-            font-style: italic;
-            margin-bottom: 40px;
-        }
+      .tagline {
+        font-size: 24px;
+        color: white;
+        font-style: italic;
+      }
 
-        .features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 24px;
-            margin-top: 60px;
-        }
+      .features {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 32px;
+      }
 
-        .feature {
-            background: white;
-            padding: 24px;
-            border-radius: 16px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-        }
+      .feature {
+        background: white;
+        padding: 24px;
+        border-radius: 16px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      }
 
-        .install-button {
-            display: inline-block;
-            background: #333;
-            color: white;
-            padding: 16px 32px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: bold;
-            transition: transform 0.2s;
-        }
+      .install-section {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 32px;
+      }
 
-        .install-button:hover {
-            transform: translateY(-2px);
-        }
+      .install-card {
+        background: white;
+        padding: 24px;
+        border-radius: 16px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        transition: transform 0.2s;
+      }
+
+      .install-card:hover {
+        transform: translateY(-5px);
+      }
+
+      .install-icon {
+        font-size: 32px;
+        margin-bottom: 16px;
+      }
+
+      .install-button {
+        display: inline-block;
+        background: #333;
+        color: white;
+        padding: 12px 24px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: bold;
+        margin-top: 16px;
+      }
+
+      .github-section {
+        margin: 20px 0;
+      }
+
+      .github-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 12px 24px;
+        background: #24292e;
+        color: white;
+        text-decoration: none;
+        border-radius: 8px;
+        font-weight: 500;
+        transition: background-color 0.2s;
+      }
+
+      .github-link:hover {
+        background: #2f363d;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <div class="container">
-        <div class="hero">
-            <div class="logo">AHEAD CAL</div>
-            <div class="tagline">Forward planning</div>
-            <a href="https://chrome.google.com/webstore/detail/your-extension-id" class="install-button">
-                Add to Chrome
-            </a>
-        </div>
+      <div class="hero">
+        <div class="logo">AHEAD CAL</div>
+        <div class="tagline">View current and next month at a glance.</div>
+      </div>
 
-        <div class="features">
-            <div class="feature">
-                <h3>Two Month View</h3>
-                <p>See current and next month at a glance for better planning</p>
-            </div>
-            <div class="feature">
-                <h3>Quick Access</h3>
-                <p>One click from your browser toolbar to view your calendar</p>
-            </div>
-            <div class="feature">
-                <h3>Clean Design</h3>
-                <p>Simple and intuitive interface focused on what matters</p>
-            </div>
+      <div class="features">
+        <div class="feature">
+          <h3>Two Month View</h3>
+          <p>See current and next month at a glance for better planning</p>
         </div>
+        <div class="feature">
+          <h3>Quick Access</h3>
+          <p>One click from your browser toolbar to view your calendar</p>
+        </div>
+        <div class="feature">
+          <h3>Clean Design</h3>
+          <p>Simple and intuitive interface focused on what matters</p>
+        </div>
+      </div>
+
+      <div class="install-section">
+        <div class="install-card">
+          <div class="install-icon">🌐</div>
+          <h3>Chrome Extension</h3>
+          <p>Access directly from your browser</p>
+          <a
+            href="https://chromewebstore.google.com/detail/aheadcal/kpaneppmlojbdfmalobnlhofdinhaacb"
+            target="_blank"
+            class="install-button">
+            Add to Chrome
+          </a>
+        </div>
+        <div class="install-card">
+          <div class="install-icon">📱</div>
+          <h3>iOS App</h3>
+          <p>Plan on the go with our mobile app</p>
+          <a href="/" class="install-button" target="_blank">
+            Coming Soon...
+          </a>
+        </div>
+        <div class="install-card">
+          <div class="install-icon">💻</div>
+          <h3>Mac App</h3>
+          <p>Native experience for your desktop</p>
+          <a href="/" class="install-button" target="_blank">
+            Coming Soon...
+          </a>
+        </div>
+      </div>
+
+      <div class="github-section">
+        <a
+          href="https://github.com/flanker/ahead-cal-chrome-extension"
+          target="_blank"
+          class="github-link">
+          <svg height="24" width="24" viewBox="0 0 16 16" fill="currentColor">
+            <path
+              d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
+          </svg>
+          View on GitHub
+        </a>
+      </div>
+
+      <div class="footer">
+        <p>© 2025 AheadCal. All rights reserved.</p>
+      </div>
     </div>
-</body>
+  </body>
 </html>
