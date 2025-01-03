@@ -74,15 +74,13 @@ export default function Calendar() {
 
   const handlePrevMonth = () => {
     setMonths((prev) => {
-      const firstMonth = Math.min(...prev)
-      return [firstMonth - 1, ...prev]
+      return prev.map(month => month - 1)
     })
   }
 
   const handleNextMonth = () => {
     setMonths((prev) => {
-      const lastMonth = Math.max(...prev)
-      return [...prev, lastMonth + 1]
+      return prev.map(month => month + 1)
     })
   }
 
