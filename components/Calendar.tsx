@@ -25,12 +25,6 @@ function MonthCalendar({
     ...Array.from({ length: daysInMonth }, (_, i) => firstDay.add(i, "day"))
   ]
 
-  const isHoliday = (date: Dayjs | null) => {
-    if (!date) return null
-    const dateStr = date.format("YYYY-MM-DD")
-    return HOLIDAYS[dateStr]
-  }
-
   const isToday = (date: Dayjs | null) => {
     if (!date) return false
     return date?.format("YYYY-MM-DD") === currentDate.format("YYYY-MM-DD")
@@ -76,18 +70,32 @@ function MonthCalendar({
 }
 
 export default function Calendar() {
-  const [monthOffset, setMonthOffset] = useState(0)
+  const [months, setMonths] = useState(() => [0, 1, 2, 3])
 
   const handlePrevMonth = () => {
-    setMonthOffset((prev) => prev - 1)
+    setMonths((prev) => {
+      const firstMonth = Math.min(...prev)
+      return [firstMonth - 1, ...prev]
+    })
   }
 
   const handleNextMonth = () => {
-    setMonthOffset((prev) => prev + 1)
+    setMonths((prev) => {
+      const lastMonth = Math.max(...prev)
+      return [...prev, lastMonth + 1]
+    })
   }
 
   const handleToday = () => {
-    setMonthOffset(0)
+    setMonths([0, 1, 2, 3])
+  }
+
+  const handleScroll = (event: WheelEvent) => {
+    if (event.deltaY < 0) {
+      handlePrevMonth()
+    } else {
+      handleNextMonth()
+    }
   }
 
   const handleKeyDown = (event: KeyboardEvent) => {
@@ -109,14 +117,14 @@ export default function Calendar() {
 
   useEffect(() => {
     window.addEventListener("keydown", handleKeyDown)
+    window.addEventListener("wheel", handleScroll)
     return () => {
       window.removeEventListener("keydown", handleKeyDown)
+      window.removeEventListener("wheel", handleScroll)
     }
   }, [])
 
   const baseDate = new Date()
-  const firstMonth = new Date(baseDate.getFullYear(), baseDate.getMonth() + monthOffset)
-  const secondMonth = new Date(baseDate.getFullYear(), baseDate.getMonth() + monthOffset + 1)
 
   return (
     <div className={styles.container}>
@@ -132,12 +140,22 @@ export default function Calendar() {
         </button>
       </div>
       <div className={styles.monthsContainer}>
-        <MonthCalendar date={dayjs(firstMonth)} currentDate={dayjs()} />
-        <MonthCalendar
-          date={dayjs(secondMonth)}
-          currentDate={dayjs()}
-          headerClassName={styles.secondMonthHeader}
-        />
+        {months.map((offset) => {
+          const monthDate = new Date(
+            baseDate.getFullYear(),
+            baseDate.getMonth() + offset
+          )
+          return (
+            <MonthCalendar
+              key={offset}
+              date={dayjs(monthDate)}
+              currentDate={dayjs()}
+              headerClassName={
+                offset !== months[0] ? styles.secondMonthHeader : undefined
+              }
+            />
+          )
+        })}
       </div>
     </div>
   )

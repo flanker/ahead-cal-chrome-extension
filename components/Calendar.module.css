@@ -2,6 +2,7 @@
   padding: 16px;
   font-family: -apple-system, BlinkMacSystemFont, sans-serif;
   width: 260px;
+  height: 460px;
   background-image: linear-gradient(
     109.6deg,
     rgba(112, 246, 255, 0.2) 11.2%,
@@ -9,6 +10,26 @@
     rgba(229, 106, 253, 0.4) 71.5%,
     rgba(123, 183, 253, 0.6) 100.2%
   );
+  position: relative;
+}
+
+.monthsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  overflow-y: auto;
+  max-height: 80vh;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  padding-top: 0; /* 减少顶部内边距，因为导航栏已经有了间距 */
+}
+
+.monthsContainer::-webkit-scrollbar {
+  display: none; /* Chrome, Safari and Opera */
 }
 
 .header.header {
@@ -16,7 +37,23 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.navigation {
+  position: sticky;
+  top: 16px;
+  background: inherit;
+  z-index: 1;
+  padding-bottom: 16px;
+  background-image: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
 }
 
 .title {
@@ -33,6 +70,41 @@
   background: none;
   font-size: 20px;
   cursor: pointer;
+}
+
+.navButton {
+  background: none;
+  border: none;
+  color: #666;
+  font-size: 18px;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s;
+}
+
+.navButton:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.todayButton {
+  background: none;
+  border: none;
+  color: #666;
+  font-size: 14px;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+.todayButton:hover {
+  background-color: rgba(0, 0, 0, 0.05);
 }
 
 .monthContainer {
@@ -112,61 +184,6 @@
 
 .eventTime {
   color: #666;
-}
-
-.header {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.navigation {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 16px;
-}
-
-.monthsContainer {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-.navButton {
-  background: none;
-  border: none;
-  color: #666;
-  font-size: 18px;
-  cursor: pointer;
-  padding: 8px;
-  border-radius: 50%;
-  width: 32px;
-  height: 32px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background-color 0.2s;
-}
-
-.navButton:hover {
-  background-color: rgba(0, 0, 0, 0.05);
-}
-
-.todayButton {
-  background: none;
-  border: none;
-  color: #666;
-  font-size: 14px;
-  cursor: pointer;
-  padding: 4px 8px;
-  border-radius: 4px;
-  transition: background-color 0.2s;
-}
-
-.todayButton:hover {
-  background-color: rgba(0, 0, 0, 0.05);
 }
 
 .holiday {
