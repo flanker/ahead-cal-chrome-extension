@@ -3,7 +3,7 @@ import { CircleChevronLeft, CircleChevronRight } from "lucide-react"
 import { useEffect, useState } from "react"
 
 import styles from "./Calendar.module.css"
-import { HOLIDAYS } from "./constants"
+import { HOLIDAYS, WORKDAYS } from "./constants"
 
 interface MonthCalendarProps {
   date: Dayjs
@@ -38,17 +38,27 @@ function MonthCalendar({
 
   const isWeekend = (date: Dayjs | null) => {
     if (!date) return false
+    const dateStr = date.format("YYYY-MM-DD")
+    if (WORKDAYS[dateStr]) return false
     const day = date.day()
-    return day === 0 || day === 6 // 0 是周日，6 是周六
+    return day === 0 || day === 6
   }
 
   const renderDay = (date: Dayjs | null) => {
-    const holiday = isHoliday(date)
+    if (!date) return <div className={styles.day}></div>
+    const dateStr = date.format("YYYY-MM-DD")
+    const holiday = HOLIDAYS[dateStr]
+    const workday = WORKDAYS[dateStr]
+
     return (
       <div
-        className={`${styles.day} ${isToday(date) ? styles.today : ""} ${isWeekend(date) ? styles.weekend : ""} ${holiday ? styles.holiday : ""}`}
-        title={holiday?.name}>
-        {date?.date()}
+        className={`${styles.day}
+          ${isToday(date) ? styles.today : ""}
+          ${isWeekend(date) ? styles.weekend : ""}
+          ${holiday ? styles.holiday : ""}
+          ${workday ? styles.workday : ""}`}
+        title={holiday?.name || workday?.name}>
+        {date.date()}
       </div>
     )
   }
@@ -104,11 +114,9 @@ export default function Calendar() {
     }
   }, [])
 
-  const currentDate = new Date()
-  const firstMonth = new Date(
-    currentDate.setMonth(currentDate.getMonth() + monthOffset)
-  )
-  const secondMonth = new Date(currentDate.setMonth(currentDate.getMonth() + 1))
+  const baseDate = new Date()
+  const firstMonth = new Date(baseDate.getFullYear(), baseDate.getMonth() + monthOffset)
+  const secondMonth = new Date(baseDate.getFullYear(), baseDate.getMonth() + monthOffset + 1)
 
   return (
     <div className={styles.container}>
