@@ -59,11 +59,6 @@ function MonthCalendar({
         {date.format("MMMM YYYY")}
       </div>
       <div className={styles.calendar}>
-        {["S", "M", "T", "W", "T", "F", "S"].map((day) => (
-          <div key={day} className={styles.weekday}>
-            {day}
-          </div>
-        ))}
         {days.map((day, i) => renderDay(day))}
       </div>
     </div>
