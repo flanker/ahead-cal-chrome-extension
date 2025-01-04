@@ -1,7 +1,7 @@
 {
   "name": "aheadcal",
   "displayName": "AheadCal",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "A forward-looking calendar that shows current and next month for better planning.",
   "author": "FENG Zhichao",
   "scripts": {
