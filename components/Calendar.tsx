@@ -57,7 +57,7 @@ function MonthCalendar({
   return (
     <div className={styles.monthContainer}>
       <div className={`${styles.monthTitle} ${headerClassName}`}>
-        {date.format("MMMM YYYY")}
+        {date.format("MMM YYYY")}
       </div>
       <div className={styles.calendar}>
         {days.map((day, i) => renderDay(day, i))}
