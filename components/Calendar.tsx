@@ -38,19 +38,16 @@ function MonthCalendar({
     return day === 0 || day === 6
   }
 
-  const renderDay = (date: Dayjs | null) => {
-    if (!date) return <div className={styles.day}></div>
+  const renderDay = (date: Dayjs | null, index: number) => {
+    if (!date) return <div key={index} className={styles.day}></div>
     const dateStr = date.format("YYYY-MM-DD")
     const holiday = HOLIDAYS[dateStr]
     const workday = WORKDAYS[dateStr]
 
     return (
       <div
-        className={`${styles.day}
-          ${isToday(date) ? styles.today : ""}
-          ${isWeekend(date) ? styles.weekend : ""}
-          ${holiday ? styles.holiday : ""}
-          ${workday ? styles.workday : ""}`}
+        key={index}
+        className={`${styles.day} ${isToday(date) ? styles.today : ""} ${isWeekend(date) ? styles.weekend : ""} ${holiday ? styles.holiday : ""} ${workday ? styles.workday : ""}`}
         title={holiday?.name || workday?.name}>
         {date.date()}
       </div>
@@ -63,7 +60,7 @@ function MonthCalendar({
         {date.format("MMMM YYYY")}
       </div>
       <div className={styles.calendar}>
-        {days.map((day, i) => renderDay(day))}
+        {days.map((day, i) => renderDay(day, i))}
       </div>
     </div>
   )
@@ -75,13 +72,13 @@ export default function Calendar() {
 
   const handlePrevMonth = () => {
     setMonths((prev) => {
-      return prev.map(month => month - 1)
+      return prev.map((month) => month - 1)
     })
   }
 
   const handleNextMonth = () => {
     setMonths((prev) => {
-      return prev.map(month => month + 1)
+      return prev.map((month) => month + 1)
     })
   }
 
