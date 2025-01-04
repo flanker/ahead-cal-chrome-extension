@@ -71,6 +71,7 @@ function MonthCalendar({
 
 export default function Calendar() {
   const [months, setMonths] = useState(() => [0, 1, 2, 3])
+  const [scrollAccumulator, setScrollAccumulator] = useState(0)
 
   const handlePrevMonth = () => {
     setMonths((prev) => {
@@ -89,10 +90,22 @@ export default function Calendar() {
   }
 
   const handleScroll = (event: WheelEvent) => {
-    if (event.deltaY < 0) {
-      handlePrevMonth()
+    event.preventDefault()
+
+    const newAccumulator = scrollAccumulator + event.deltaY
+    setScrollAccumulator(newAccumulator)
+
+    const threshold = 100
+
+    if (Math.abs(newAccumulator) >= threshold) {
+      if (newAccumulator < 0) {
+        handlePrevMonth()
+      } else {
+        handleNextMonth()
+      }
+      setScrollAccumulator(0)
     } else {
-      handleNextMonth()
+      setScrollAccumulator(newAccumulator)
     }
   }
 
@@ -114,13 +127,19 @@ export default function Calendar() {
   }
 
   useEffect(() => {
+    const handleWheel = (e: WheelEvent) => {
+      e.preventDefault()
+      handleScroll(e)
+    }
+
     window.addEventListener("keydown", handleKeyDown)
-    window.addEventListener("wheel", handleScroll)
+    window.addEventListener("wheel", handleWheel, { passive: false })
+
     return () => {
       window.removeEventListener("keydown", handleKeyDown)
-      window.removeEventListener("wheel", handleScroll)
+      window.removeEventListener("wheel", handleWheel)
     }
-  }, [])
+  }, [scrollAccumulator])
 
   const baseDate = new Date()
 
